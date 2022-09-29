@@ -2,6 +2,16 @@ import express from 'express'
 
 const app = express();
 
+// HTTP methods / API RESTful / HTTP Codes
+
+app.get('/games', (req,res) => {
+    return res.json([]);
+})
+
+app.post('/ads', (req,res) => {
+    return res.status(201).json([]);
+})
+
 app.get('/ads', (req,res) => {
     return res.json([
         {id: 1, name: 'Anuncio 1'},
