@@ -2,7 +2,7 @@
 
 ## Features a fazer:
 
-### Aplicar responsividade, mobile first.
-### Incluir carrossel na listagem dos games (KEEN-SLIDER).
-### Validações (React Hook Form).
-### Autenticação com Discord.
+### 1) Aplicar responsividade, mobile first.
+### 2) Incluir carrossel na listagem dos games (KEEN-SLIDER).
+### 3) Validações (React Hook Form).
+### 4) Autenticação com Discord.
