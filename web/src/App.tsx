@@ -9,6 +9,7 @@ import './styles/main.css';
 import logoImg from './assets/logo-nlw-esports.svg';
 import { Input } from './components/Form/Input';
 import { CreateAdModal } from './components/CreateAdModal';
+import axios from 'axios';
 
 
 
@@ -28,10 +29,9 @@ function App() {
 
 
   useEffect (() => {
-    fetch('http://localhost:3333/games')
-      .then(res => res.json())
-      .then(data => {
-        setGames(data)
+    axios('http://localhost:3333/games')
+      .then(res => {
+        setGames(res.data)
       })
   }, [])
 

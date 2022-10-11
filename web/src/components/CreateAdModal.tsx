@@ -5,6 +5,7 @@ import * as ToggleGroup from '@radix-ui/react-toggle-group';
 
 import { Input } from "./Form/Input";
 import { FormEvent, useEffect, useState } from "react";
+import axios from "axios";
 
 interface Game {
     id: string;
@@ -16,20 +17,40 @@ export function CreateAdModal() {
     const [weekDays, setWeekDays] = useState<string[]>([])
     const [useVoiceChannel, setUseVoiceChannel] = useState(false)
 
-    function handleCreateAd(e : FormEvent) {
+    async function handleCreateAd(e : FormEvent) {
         e.preventDefault();
 
         const formData = new FormData(e.target as HTMLFormElement)
         const data = Object.fromEntries(formData)
-        console.log(data)
-        console.log(useVoiceChannel)
+
+        if(!data.name){
+          return
+        }
+
+        try{
+          await axios.post(`http://localhost:3333/games/${data.game}/ads`, {
+            name: data.name,
+            yearsPlaying: Number(data.yearsPlaying),
+            discord: data.discord,
+            weekDays: weekDays.map(Number),
+            hourStart: data.hourStart,
+            hourEnd: data.hourEnd,
+            useVoiceChannel: useVoiceChannel
+          })
+
+          alert('Anúncio criado com sucesso!')
+        }catch(err){
+          console.log(err)
+          alert('Erro ao criar anúncio')
+        }
+
+
     }
 
     useEffect (() => {
-      fetch('http://localhost:3333/games')
-        .then(res => res.json())
-        .then(data => {
-          setGames(data)
+      axios('http://localhost:3333/games')
+        .then(res => {
+          setGames(res.data)
         })
     }, [])
 
